@@ -67,7 +67,8 @@ class ViewController: UIViewController {
         for button in messageButtons{
             let index = button.tag - 1
             let message = messages[index]
-            button.setTitle(message.fromName, for: .normal)
+            //button.setTitle(message.fromName, for: .normal)
+            button.apply(ButtonStyle.standard , with: message.fromName)
         }
     }
     
