@@ -8,30 +8,16 @@
 
 import Foundation
 
-struct address {
-    
-    
-    
-    
-    
+struct Address: Codable {
     var addressOne: String = ""
-    
-    
-    
-    
     var addressTwo: String = ""
     var cityTown: String = ""
-    var State: String = ""
-    
-    
-    
-    
-    
-    var ZipCode: String = ""
+    var state: String = ""
+    var zipCode: String = ""
 }
 
 extension Address {
-    var isFilledOut: Bool {
-        return && !cityTown.isEmpty && !state.isEmpty && !zipCode.isEmpty
+    var isAdressFilledOut: Bool {
+        return !addressOne.isEmpty && !cityTown.isEmpty && !state.isEmpty && !zipCode.isEmpty
     }
 }

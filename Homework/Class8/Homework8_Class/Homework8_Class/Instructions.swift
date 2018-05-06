@@ -29,5 +29,9 @@
 //  9) Research how to save your credit card data using NSUserDefault system, and then save your data so that if you kill the app and reload it, you can load your entered data.
 //
 //  10) Come up with 3 ways you can improve the codebase or user experience. List them for me below and the implement them.
-//
+//          remove name from navigation bar back button leaving only the arrow so that the navigation bar look more clean
+//          Rename files and divide them in folders
+//          make app portrait only for better experience
+//          remove enums from addcreditcard to external file so class would be more clean
+//          add disclosureIndicator so user can know that if the cell is pressed will have an action
 
