@@ -34,7 +34,7 @@ class CreditCardsViewController: UIViewController {
     }
 }
 
-extension CreditCardsViewController: AddCreditCardDelegate {
+extension CreditCardsViewController: CreditCardDetailsDelegate {
     func didPressSaveButton(didFinishAdding creditCard: CreditCard) {
         navigationController?.popViewController(animated: true)
         creditCards.append(creditCard)

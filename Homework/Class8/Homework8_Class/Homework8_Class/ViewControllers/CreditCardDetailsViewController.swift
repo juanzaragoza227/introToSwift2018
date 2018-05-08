@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol AddCreditCardDelegate: class {
+protocol CreditCardDetailsDelegate: class {
     func didPressSaveButton(didFinishAdding creditCard: CreditCard)
     func didPressSaveButton(didFinishEditing creditCard: CreditCard)
 }
@@ -16,7 +16,7 @@ protocol AddCreditCardDelegate: class {
 class CreditCardDetailsViewController: UIViewController {
     
     var newCreditCard = CreditCard()
-    weak var delegate: AddCreditCardDelegate?
+    weak var delegate: CreditCardDetailsDelegate?
     var cardToEdit: CreditCard?
     
     @IBOutlet weak var tableView: UITableView!
@@ -28,6 +28,7 @@ class CreditCardDetailsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(saveButtonPressed))
         if cardToEdit != nil {
             title = "Edit Credit Card"
             navigationItem.rightBarButtonItem?.isEnabled = true
@@ -42,7 +43,6 @@ class CreditCardDetailsViewController: UIViewController {
         
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: .UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: .UIKeyboardWillHide, object: nil)
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(saveButtonPressed))
     }
     
     @objc private func saveButtonPressed() {
@@ -99,6 +99,11 @@ extension CreditCardDetailsViewController: UITableViewDelegate {
         resignFirstResponder()
         self.view.endEditing(true)
     }
+    
+    func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "textEntryCell", for: indexPath) as! CreditCardDetailsTextEntryCell
+        cell.textField.text = ""
+    }
 }
 //MARK: Helper to fillup cells
 extension CreditCardDetailsViewController {
@@ -133,6 +138,8 @@ extension CreditCardDetailsViewController {
         
         if let card = cardToEdit {
             setCardDetailsToEdit(cellType, cell, card)
+        }else {
+            setCardDetailsToEdit(cellType, cell, newCreditCard)
         }
         
         return cell
@@ -159,6 +166,8 @@ extension CreditCardDetailsViewController {
         
         if let card = cardToEdit {
             setAdressDetailsToEdit(cellType, cell, card)
+        }else {
+            setAdressDetailsToEdit(cellType, cell, newCreditCard)
         }
         
         return cell
@@ -259,24 +268,3 @@ extension CreditCardDetailsViewController {
         newCreditCard.address = newCreditCard.updateAddressDetail(cellType, text)
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
