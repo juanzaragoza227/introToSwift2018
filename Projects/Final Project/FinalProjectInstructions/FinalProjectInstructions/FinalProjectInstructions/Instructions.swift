@@ -12,14 +12,14 @@
 //
 //  Project Requirements:
 //
-//  1) Load data from a selected data set from https://data.pr.gov/en/
-//      You must use Alamofire via Cocoapods to load the data.
+//  1) Load data from a selected data set from https://data.pr.gov/data?type=datasets
+//  You must use Alamofire via Cocoapods to load the data. Make sure that the dataset you select has a data item containing at least 5 pieces of information or property.
 //
 //  2) Display the data in a UITableViewController, using your own custom UITableViewCell. The cell must show at least 3 different pieces of information pertaining to your dataset.
 //
 //  3) When pulling down on the table view to refresh, the dataset should be cleared and fetched again from the pr.gov database.
 //
-//  4) Selecting a cell should take the user to a detail view (via a navigation push) that will show the user at least 8 pieces of information (including the 4 that were shown on the table view)
+//  4) Selecting a cell should take the user to a detail view (via a navigation push) that will show the user at least 5 pieces of information (including the 4 that were shown on the table view)
 //
 //  5) In the detail view, add a navigation bar button item that will be used to Favorite or Unfavorite this specific item.
 //
@@ -31,170 +31,20 @@
 //
 //  the first tab will show the view controller described in parts 1-3.
 //
-//  7) The Favorites view controller will consist of all the items from the data set that the user decided to favorite from the detail view. In this view, the user should have the ability to delete an item or rearrange the order of the items. Additionally the user should have the option to add a custom item by pressing on an 'Add' navigation bar button item. Pressing on that button will push open an AddViewController. The AddViewController should have textfields for the bare minimum of data you need to create a new item similar to those from the dataset.
+//  7) The Favorites view controller will consist of all the items from the data set that the user decided to favorite from the detail view.
+
+//  8) In this view, the user should have the ability to delete an item or rearrange the order of the items.
+
+//    9)    Additionally the user should have the option to add a custom item by pressing on an 'Add' navigation bar button item. Pressing on that button will push open an AddViewController.
+
+ //   10)   The AddViewController should have textfields for the bare minimum of data you need to create a new item similar to those from the dataset.
 //
-//  8) The More Info view controller should load a web view that is relevant to your dataset. It could be from pr.gov's site or something relevant and appropriate.
+//    11) The More Info view controller should load a web view that is relevant to your dataset. It could be from pr.gov's site or something relevant and appropriate.
 //
-//  9) When the application 'resigns active', the application should save the user's favorite data locally. When the application 'becomes active' the application should load any locally saved favorite data.
+//    12) When the application 'resigns active', the application should save the user's favorite data locally. When the application 'becomes active' the application should load any locally saved favorite data.
 //
-//  10) All data models should conform to Codable.
+//    13) All data models should conform to Codable.
 //
-//  11) The application should have a custom launch screen relevant to your dataset
+//  14) The application should have a custom launch screen relevant to your dataset
 //
-//  12) The application should have a specific set of colors and fonts that it uses to provide a consistent user experience.
-//
-//
-//
-//  First part of Final Project:
-//
-//  Research which dataset you want to use for your project, and write out a struct that will represent the fundamental object found in your chose dataset.
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
+    15) The application should have a specific set of colors and fonts that it uses to provide a consistent user experience.

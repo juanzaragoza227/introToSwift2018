@@ -141,7 +141,6 @@ extension CreditCardDetailsViewController {
         }else {
             setCardDetailsToEdit(cellType, cell, newCreditCard)
         }
-        
         return cell
     }
     
@@ -238,7 +237,6 @@ extension CreditCardDetailsViewController {
             break
         }
         newCreditCard = newCreditCard.updateCardDetail(cellType, text)
-
     }
     
     func setAdressDetailsToEdit(_ cellType: AddressSectionCellType, _ cell: CreditCardDetailsTextEntryCell, _ card: CreditCard) {

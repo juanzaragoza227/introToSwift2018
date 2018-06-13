@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Alamofire
 
 enum APIResourceURL: String {
     case pokemon
@@ -21,86 +22,68 @@ enum APIResourceURL: String {
 
 class QueryService {
     typealias JSONDictionary = [String: Any]
-    typealias PokemonQueryResult = ([Pokemon]?, String) -> ()
     typealias SuccessResult = (Bool, String) -> ()
     
+    let appData = AppData.shared
     let defaultSession = URLSession(configuration: .default)
     var dataTask: URLSessionDataTask?
+    var dataTasks = [URLSessionDataTask]()
     
+    var nextPageURL: String?
     var errorMessage = ""
-    var pokemonList = [Pokemon]()
+    
+    var nextURLString: String {
+        return (nextPageURL != nil) ? nextPageURL! : APIResourceURL.pokemon.url
+    }
 }
 
 extension QueryService {
     
-    func fetchOriginalPokemon(completion: @escaping PokemonQueryResult) {
-        
-        dataTask?.cancel()
-        
-        let urlString = APIResourceURL.pokemon.url
-        
-        if let urlComponents = URLComponents(string: urlString) {
-            guard let url = urlComponents.url else { return }
+    func fetchOriginalPokemon(completion: @escaping SuccessResult) {
+        Alamofire.request(nextURLString).responseJSON { (response) in
             
-            dataTask = defaultSession.dataTask(with: url, completionHandler: { (data, response, error) in
-                
-                if let error = error {
-            
-                    self.errorMessage += "Data error: " + error.localizedDescription
+            let didUpdatePokemon = self.updatePokemonResults(response)
+            completion(didUpdatePokemon, self.errorMessage)
+        }
+    }
+    
+    func fetchPokemonDetailsWith(_ urlString: String, completion: @escaping SuccessResult) {
         
-                } else if let data = data,
-                    let response = response as? HTTPURLResponse,
-                    response.statusCode == 200 {
-                    
-                    let pokemonList = self.updatePokemonResults(data)
-                    
-                    DispatchQueue.main.async {
-                        completion(pokemonList, self.errorMessage)
-                    }
-                }
-                
-            })
-            
-            dataTask?.resume()
+        Alamofire.request(urlString).responseJSON { (response) in
+            let didUpdateDetails = self.updatePokemonDetails(response)
+            completion(didUpdateDetails, self.errorMessage)
         }
     }
 }
 
 extension QueryService {
     
-    private func updatePokemonResults(_ data: Data) -> [Pokemon] {
-        var response: JSONDictionary?
-        var pokemon: [Pokemon] = []
-        
-        do {
-            response = try JSONSerialization.jsonObject(with: data, options: []) as? JSONDictionary
-        } catch let error as NSError {
-            errorMessage += "JSONSerialization error: \(error.debugDescription)"
+    private func updatePokemonResults(_ response: DataResponse<Any>) -> Bool {
+        guard let data = response.data else { return false }
+
+        if let pokemonResponse = convertData(to: PokemonResponse.self, data) {
+            appData.updatePokemonList(with: pokemonResponse)
+            return true
+        } else {
+            return false
         }
+    }
+    
+    private func updatePokemonDetails(_ response: DataResponse<Any>) -> Bool {
+        guard let data = response.data else { return false }
         
-        let results = response?["results"] ?? []
-        
-        let jsonData = json(from: results)!
+        if let pokemonDetailResponse = convertData(to: PokemonDetailResponse.self, data) {
+            appData.updatePokemonImage(with: pokemonDetailResponse)
+            return true
+        } else {
+            return false
+        }
+    }
+}
+
+extension QueryService {
+    private func convertData<T:Decodable>(to type: T.Type, _ data: Data) -> T? {
         let decoder = JSONDecoder()
-        
-        do {
-            pokemon = try decoder.decode([Pokemon].self, from: jsonData)
-        } catch {
-            print("Error converting Data into structs")
-        }
-        
-        return pokemon
-    }
-    
-    func json(from object:Any) -> Data? {
-        guard let data = try? JSONSerialization.data(withJSONObject: object, options: []) else {
-            return nil
-        }
-        return data
+        return try? decoder.decode(type, from: data)
     }
 }
-
-
-
-
-
