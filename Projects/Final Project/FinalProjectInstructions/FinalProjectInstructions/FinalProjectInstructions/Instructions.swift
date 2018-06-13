@@ -31,6 +31,7 @@
 //
 //  the first tab will show the view controller described in parts 1-3.
 //
+<<<<<<< HEAD
 //  7) The Favorites view controller will consist of all the items from the data set that the user decided to favorite from the detail view.
 
 //  8) In this view, the user should have the ability to delete an item or rearrange the order of the items.
@@ -48,3 +49,172 @@
 //  14) The application should have a custom launch screen relevant to your dataset
 //
     15) The application should have a specific set of colors and fonts that it uses to provide a consistent user experience.
+=======
+//  7) The Favorites view controller will consist of all the items from the data set that the user decided to favorite from the detail view. In this view, the user should have the ability to delete an item or rearrange the order of the items. Additionally the user should have the option to add a custom item by pressing on an 'Add' navigation bar button item. Pressing on that button will push open an AddViewController. The AddViewController should have textfields for the bare minimum of data you need to create a new item similar to those from the dataset.
+//
+//  8) The More Info view controller should load a web view that is relevant to your dataset. It could be from pr.gov's site or something relevant and appropriate.
+//
+//  9) When the application 'resigns active', the application should save the user's favorite data locally. When the application 'becomes active' the application should load any locally saved favorite data.
+//
+//  10) All data models should conform to Codable.
+//
+//  11) The application should have a custom launch screen relevant to your dataset
+//
+//  12) The application should have a specific set of colors and fonts that it uses to provide a consistent user experience.
+//
+//
+//
+//  First part of Final Project:
+//
+//  Research which dataset you want to use for your project, and write out a struct that will represent the fundamental object found in your chose dataset.
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+>>>>>>> upstream/master

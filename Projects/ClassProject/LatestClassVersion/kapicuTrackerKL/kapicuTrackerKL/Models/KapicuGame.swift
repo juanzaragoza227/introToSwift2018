@@ -26,6 +26,11 @@ class KapicuGame {
 // MARK: - Custom getters
 
 extension KapicuGame {
+    
+    var numberOfPlayers: NumberOfPlayers {
+        return gameModel.numberOfPlayers
+    }
+    
     func navTitleFor(_ player: PlayerToConfigure) -> String {
         return gameModel.navTitleFor(player)
     }
@@ -37,6 +42,21 @@ extension KapicuGame {
     func nextPlayerToConfigure(_ currentPlayer: PlayerToConfigure) -> PlayerToConfigure {
         return gameModel.nextPlayerToConfigure(currentPlayer)
     }
+    
+    func name(of player: PlayerToConfigure) -> String {
+        switch player {
+        case .one:
+            return gameModel.firstPlayer
+        case .two:
+            return gameModel.secondPlayer
+        case .three:
+            return gameModel.thirdPlayer
+        case .four:
+            return gameModel.fourthPlayer
+        default:
+            return ""
+        }
+    }
 }
 
 // MARK: - Mutating functions
@@ -47,17 +67,30 @@ extension KapicuGame {
     }
     
     func updatePlayerName(_ name: String, _ player: PlayerToConfigure) {
-        gameModel.updatePlayerName(name, player)
+        switch player {
+        case .one:
+            gameModel.firstPlayer = name
+        case .two:
+            gameModel.secondPlayer = name
+        case .three:
+            gameModel.thirdPlayer = name
+        case .four:
+            gameModel.fourthPlayer = name
+        case .allConfigured:
+            break
+        }
+    }
+    
+    func updateWinningScore(_ score: Int) {
+        gameModel.winningScore = score
+    }
+    
+    func updatePrizeOption(_ withPrizes: Bool) {
+        gameModel.withPrizes = withPrizes
     }
     
     func updateWinningScore(_ score: Int) {
         gameModel.updateWinningScore(score)
     }
 }
-
-
-
-
-
-
 

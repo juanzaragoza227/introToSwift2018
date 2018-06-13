@@ -22,6 +22,11 @@ enum VCIdentifiers: String {
     case numberOfPlayers
     case playerName
     case scoreSelection
+<<<<<<< HEAD
+=======
+    case prizeSelection
+    case gameView
+>>>>>>> upstream/master
     
     var txt: String {
         return self.rawValue

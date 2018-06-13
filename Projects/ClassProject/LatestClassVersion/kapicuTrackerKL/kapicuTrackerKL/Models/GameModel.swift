@@ -15,6 +15,10 @@ struct GameModel {
     var thirdPlayer: String = ""
     var fourthPlayer: String = ""
     var winningScore: Int = 500
+<<<<<<< HEAD
+=======
+    var withPrizes: Bool = true
+>>>>>>> upstream/master
 }
 
 extension GameModel {
@@ -58,26 +62,41 @@ extension GameModel {
             return .allConfigured
         }
     }
+}
+
+extension GameModel {
     
-    mutating func updatePlayerName(_ name: String, _ player: PlayerToConfigure) {
-        switch player {
-        case .one:
-            firstPlayer = name
-        case .two:
-            secondPlayer = name
-        case .three:
-            thirdPlayer = name
-        case .four:
-            fourthPlayer = name
-        case .allConfigured:
-            break
-        }
+    static func defaultModel(with numberOfPlayers: NumberOfPlayers) -> GameModel {
+        
+        let hasAtLeast3 = numberOfPlayers == .three || numberOfPlayers == .four
+        let has4 = numberOfPlayers == .four
+        
+        let playerOne = "Roberto"
+        let playerTwo = "Nancy"
+        let playerThree = hasAtLeast3 ? "Miguel" : ""
+        let playerFour = has4 ? "Maria" : ""
+        
+        let winningScore = ScoreSelectionViewController.WinningScore.fiveHundred.rawValue
+        
+        return GameModel(
+            numberOfPlayers: numberOfPlayers,
+            firstPlayer: playerOne,
+            secondPlayer: playerTwo,
+            thirdPlayer: playerThree,
+            fourthPlayer: playerFour,
+            winningScore: winningScore,
+            withPrizes: true
+        )
     }
     
     mutating func updateWinningScore(_ score: Int) {
         self.winningScore = score
     }
 }
+
+
+
+
 
 
 

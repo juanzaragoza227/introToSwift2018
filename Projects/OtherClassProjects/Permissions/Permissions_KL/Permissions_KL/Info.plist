@@ -34,6 +34,11 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+<<<<<<< HEAD
+=======
+	<key>NSCameraUsageDescription</key>
+	<string>Granting access allows you to upload a profile photo.</string>
+>>>>>>> upstream/master
 	<key>UISupportedInterfaceOrientations~ipad</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
